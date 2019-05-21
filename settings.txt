@@ -1,3 +1,6 @@
+-- npm router
+npm install vue-router
+
 --firebase sdk 설치
 npm install firebase --save
 
@@ -9,3 +12,7 @@ firebase init // 모두 선택
 
 --firebase deploy
 firebase deploy
+
+--component
+npm install vue-tables-2
+npm install --save vue2-editor
