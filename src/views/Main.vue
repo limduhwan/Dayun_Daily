@@ -1,13 +1,10 @@
 <template>
     <div>
         <div v-if="listOrNot">
-            <YearMonth></YearMonth>
-            <!--<router-link to="/write" class="button" @click="btnAddClick('writeBtn')">작성</router-link>-->
-            <button class="button" @click="btnClick('write')">작성</button>
+             <ListComGroup @writeBtnClick="writeBtnClick"></ListComGroup>
         </div>
         <div v-else>
-            <!--<router-link to="/list" class="button">닫기</router-link>-->
-            <button class="button" @click="btnClick('list')">닫기</button>
+            <WriteComGroup @goBackList="goBackList"></WriteComGroup>
         </div>
         <div>
             <router-view></router-view>
@@ -16,11 +13,14 @@
 </template>
 
 <script>
-    import YearMonth from '../components/mocules/YearMonth';
+    import ListComGroup from '../components/mocules/ListComGroup';
+    import WriteComGroup from '../components/mocules/WriteComGroup';
+
     export default {
         name: "Main",
         components: {
-            YearMonth,
+            ListComGroup,
+            WriteComGroup
         },
         data() {
             return{
@@ -32,15 +32,15 @@
             this.$router.push('/list')
         },
         methods: {
-            btnClick (btn) {
-                if(btn == "write"){
-                    this.$router.push('/write')
-                    this.listOrNot = false;
-                }else if(btn == "list"){
-                    this.$router.push('/list')
-                    this.listOrNot = true;
-                }
+            writeBtnClick () {
+                this.$router.push('/write')
+                this.listOrNot = false;
             },
+            goBackList () {
+                this.$router.push('/list')
+                this.listOrNot = true;
+            }
+
         }
     }
 </script>

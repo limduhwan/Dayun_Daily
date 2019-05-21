@@ -16,3 +16,5 @@ firebase deploy
 --component
 npm install vue-tables-2
 npm install --save vue2-editor
+npm install bootstrap
+npm install vuejs-datepicker --save

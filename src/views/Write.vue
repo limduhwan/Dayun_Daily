@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-editor></vue-editor>
+        <vue-editor id="editor1"></vue-editor>
     </div>
 </template>
 
@@ -16,5 +16,7 @@
 </script>
 
 <style scoped>
-
+    #editor1 {
+        height: 1000px;
+    }
 </style>

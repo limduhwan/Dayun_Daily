@@ -1,25 +1,32 @@
 <template>
-
+    <div>
+        <Datepicker class="button"></Datepicker>
+    </div>
 </template>
 
 <script>
+    import Datepicker from 'vuejs-datepicker';
+
     export default {
-        name: "select-box-day"
+        name: 'button-calendar',
+        components: {
+            Datepicker
+        }
+
     }
 </script>
 
 <style scoped>
-    .selectBox {
-        background-color: #6c757d;
+    .button {
+        background-color: #4CAF50;
         border: none;
-        color: white;
-        padding: 5px 32px;
+        color: midnightblue;
+        padding: 1px 1px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
+        margin: 1px 1px;
         cursor: pointer;
-        font-weight: bold;
     }
 </style>
