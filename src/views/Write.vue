@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input class="title" placeholder="Title here">
+        <input class="title" placeholder="Dayun Story">
         <vue-editor id="editor1"></vue-editor>
     </div>
 </template>
