@@ -13,6 +13,9 @@ firebase init // 모두 선택
 --firebase deploy
 firebase deploy
 
+-- vuex
+npm install vuex --save
+
 --component
 npm install vue-tables-2
 npm install --save vue2-editor

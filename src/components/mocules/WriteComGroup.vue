@@ -1,10 +1,10 @@
 <template>
     <div>
-        <!--<div style="float: left; width: 100%; padding: 0px 0px 0px 0px;">-->
+        <div tyle="float: left; width: 0%; padding: 0px 0px 0px 0px;">
             <SelectBoxDay></SelectBoxDay>
             <button class="button" @click="goBackList()">닫기</button>
             <button class="button">저장</button>
-        <!--</div>-->
+        </div>
     </div>
 </template>
 

@@ -6,12 +6,12 @@
 
 <script>
   import Main from './views/Main';
-export default {
-  name: 'app',
-  components: {
-    Main
+  export default {
+      name: 'app',
+      components: {
+        Main
 
-  }
+      }
 }
 </script>
 

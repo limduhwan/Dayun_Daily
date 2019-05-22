@@ -1,18 +1,28 @@
 <template>
-    <select class="selectBox" v-model="selectedMonth">
-        <option v-for="month in months" >
+    <select class="selectBox" v-model="selectedMonth" @change="changeMonth">
+        <option v-for="month in months" v-bind:key="month">
             {{month}}
         </option>
     </select>
 </template>
 
 <script>
+    import Constant from '../../Constant';
+
     export default {
         name: "selectBoxMonth",
         data: function(){
             return{
                 selectedMonth: new Date().getMonth()+1,
                 months: 12,
+            }
+        },
+        mounted (){
+            this.$store.commit(Constant.SET_MONTH, {month:this.selectedMonth});
+        },
+        methods :{
+            changeMonth () {
+                this.$store.commit(Constant.SET_MONTH, {month:this.selectedMonth});
             }
         }
     }

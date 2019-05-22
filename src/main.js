@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import router from './router'
 import {ClientTable} from 'vue-tables-2'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import store from './store'
 
 Vue.use(ClientTable);
 Vue.config.productionTip = false;
@@ -20,6 +21,7 @@ let config = {
 firebase.initializeApp(config);
 
 new Vue({
+  store,
   render: h => h(App),
   router
 }).$mount('#app')

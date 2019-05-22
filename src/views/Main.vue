@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="listOrNot">
-             <ListComGroup @writeBtnClick="writeBtnClick"></ListComGroup>
+            <ListComGroup @writeBtnClick="writeBtnClick"></ListComGroup>
         </div>
         <div v-else>
             <WriteComGroup @goBackList="goBackList"></WriteComGroup>
@@ -15,6 +15,7 @@
 <script>
     import ListComGroup from '../components/mocules/ListComGroup';
     import WriteComGroup from '../components/mocules/WriteComGroup';
+    import Constant from '../Constant';
 
     export default {
         name: "Main",
@@ -24,12 +25,13 @@
         },
         data() {
             return{
-                listOrNot: false
+                listOrNot: false,
             }
         },
-        created() {
+        mounted() {
             this.listOrNot = true;
             this.$router.push('/list')
+
         },
         methods: {
             writeBtnClick () {
@@ -39,6 +41,7 @@
             goBackList () {
                 this.$router.push('/list')
                 this.listOrNot = true;
+                // alert(this.$store.state.combo.month);
             }
 
         }

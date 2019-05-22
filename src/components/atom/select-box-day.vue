@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <Datepicker class="button"></Datepicker>
-    </div>
+    <Datepicker class="calendar"></Datepicker>
 </template>
 
 <script>
@@ -17,7 +15,7 @@
 </script>
 
 <style scoped>
-    .button {
+    .calendar {
         background-color: #4CAF50;
         border: none;
         color: midnightblue;
