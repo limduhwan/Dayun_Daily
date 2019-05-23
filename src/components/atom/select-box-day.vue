@@ -1,5 +1,5 @@
 <template>
-    <Datepicker class="calendar"></Datepicker>
+    <Datepicker class="calendar" :value="date" @selected="changeDate"></Datepicker>
 </template>
 
 <script>
@@ -7,8 +7,24 @@
 
     export default {
         name: 'button-calendar',
+        props: ['date'],
         components: {
             Datepicker
+        },
+        mounted() {
+          // this.today = this.date;
+          console.log('datepicker ' + this.date)
+        },
+        data: function () {
+            return {
+                today : new Date(),
+            }
+        },
+        methods: {
+            changeDate(date) {
+                // console.log('change date   '+ date);
+                this.$emit('changeDate', date);
+            }
         }
 
     }

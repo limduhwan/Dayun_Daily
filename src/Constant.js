@@ -1,6 +1,6 @@
 export default {
-    SET_YEAR : "setYear",
-    SET_MONTH : "setMonth",
-    DONE_TOGGLE : "doneToggle",
-    DELETE_TODO : "deleteTodo"
+    SET_YEAR : 'setYear',
+    SET_MONTH : 'setMonth',
+    SET_DATE : 'setDate',
+    SET_PARENT: "setParent"
 }

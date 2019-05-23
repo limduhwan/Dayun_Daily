@@ -1,25 +1,40 @@
 <template>
     <div>
         <div tyle="float: left; width: 0%; padding: 0px 0px 0px 0px;">
-            <SelectBoxDay></SelectBoxDay>
+            <SelectBoxDay :date="date" @changeDate="changeDate"></SelectBoxDay>
             <button class="button" @click="goBackList()">닫기</button>
-            <button class="button">저장</button>
+            <button class="button" @click="btnSaveClick()">저장</button>
         </div>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import SelectBoxDay from '../atom/select-box-day';
 
     export default {
         name: "WriteComGroup",
+        props : ['date'],
         components: {
             SelectBoxDay
         },
+        computed : mapState({
+            year :  (state) => state.combo.year,
+            month : (state) => state.combo.month,
+            whoParent : (state) => state.parent.who
+        }),
         methods: {
             goBackList() {
                 this.$emit('goBackList', '');
+            },
+            btnSaveClick() {
+               this.$emit('btnSaveClick', '');
+            },
+            changeDate (date){
+                // console.log('write ' + date);
+                this.$emit('changeDate', date);
             }
+
         }
 
     }
@@ -30,7 +45,7 @@
         background-color: #4CAF50;
         border: none;
         color: white;
-        padding: 5px 32px;
+        padding: 5px 10px;
         text-align: center;
         text-decoration: none;
         display: inline-block;

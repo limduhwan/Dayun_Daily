@@ -7,10 +7,10 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         combo : [
-            {year:"", month:""}
+            {year:'', month:'', date:''}
         ],
         parent :[
-            {who:""}
+            {who:''}
         ]
     },
     mutations: {
@@ -19,7 +19,10 @@ const store = new Vuex.Store({
         },
         [Constant.SET_MONTH] : (state, payload) => {
             state.combo.month = payload.month;
-        }
+        },
+        [Constant.SET_DATE] : (state, payload) => {
+            state.combo.date = payload.date;
+        },
     }
 })
 

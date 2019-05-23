@@ -1,50 +1,45 @@
 <template>
     <div>
-        <div v-if="listOrNot">
-            <ListComGroup @writeBtnClick="writeBtnClick"></ListComGroup>
-        </div>
-        <div v-else>
-            <WriteComGroup @goBackList="goBackList"></WriteComGroup>
-        </div>
-        <div>
-            <router-view></router-view>
-        </div>
+        <!--<div v-if="listOrNot">-->
+            <!--<ListComGroup @writeBtnClick="writeBtnClick"></ListComGroup>-->
+        <!--</div>-->
+        <!--<div v-else>-->
+            <!--<WriteComGroup @goBackList="goBackList"></WriteComGroup>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--<router-view></router-view>-->
+        <!--</div>-->
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     import ListComGroup from '../components/mocules/ListComGroup';
     import WriteComGroup from '../components/mocules/WriteComGroup';
-    import Constant from '../Constant';
+    // import Constant from '../Constant';
 
     export default {
         name: "Main",
         components: {
-            ListComGroup,
-            WriteComGroup
-        },
-        data() {
-            return{
-                listOrNot: false,
-            }
+            // ListComGroup,
+            // WriteComGroup
         },
         mounted() {
-            this.listOrNot = true;
             this.$router.push('/list')
 
         },
-        methods: {
-            writeBtnClick () {
-                this.$router.push('/write')
-                this.listOrNot = false;
-            },
-            goBackList () {
-                this.$router.push('/list')
-                this.listOrNot = true;
-                // alert(this.$store.state.combo.month);
-            }
-
-        }
+        // methods: {
+        //     writeBtnClick () {
+        //         this.$router.push('/write')
+        //         this.listOrNot = false;
+        //     },
+        //     goBackList () {
+        //         this.$router.push('/list')
+        //         this.listOrNot = true;
+        //         // alert(this.$store.state.combo.month);
+        //     }
+        //
+        // }
     }
 </script>
 

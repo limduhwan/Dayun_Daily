@@ -20,6 +20,8 @@ let config = {
 
 firebase.initializeApp(config);
 
+export default firebase;
+
 new Vue({
   store,
   render: h => h(App),

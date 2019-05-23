@@ -1,12 +1,14 @@
 <template>
-    <select class="selectBox" v-model="selectedYear" @change="changeYear">
-        <option>2020</option>
+    <select class="selectBox" v-model="year" @change="setYear({year: year})">
         <option>2019</option>
+        <option>2020</option>
+        <option>2021</option>
     </select>
 </template>
 
 <script>
     import Constant from '../../Constant';
+    import { mapState, mapMutations } from 'vuex';
 
     export default {
         name: "selectBoxYear",
@@ -15,15 +17,13 @@
                 selectedYear: new Date().getFullYear(),
             }
         },
-        mounted(){
-            this.$store.commit(Constant.SET_YEAR, {year:this.selectedYear});
-
-
-        },
+        computed : mapState({
+            year: (state) => state.combo.year
+        }),
         methods:{
-            changeYear (){
-                this.$store.commit(Constant.SET_YEAR, {year:this.selectedYear});
-            }
+            ...mapMutations({
+                setYear : Constant.SET_YEAR,
+            })
         }
 
     }

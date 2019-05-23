@@ -10,12 +10,13 @@ export default new Router({
     routes: [
 
         {
-            path: '/write',
+            path: '/write/:detail_date',
             name: 'write',
             component: Write,
+            props: true
         },
         {
-            path: '/list',
+            path: '/list/',
             name: 'list',
             component: List,
         },
