@@ -24,7 +24,8 @@
             return{
                 date: '',
                 title: '',
-                content: ''
+                content: '',
+                calendarDate: new Date()
             }
         },
         mounted (){
@@ -35,9 +36,13 @@
 
             this.date = this.detail_date == '' ? new Date() : new Date(this.year, this.month-1, this.detail_date);
 
-            this.getContent(this.year, this.month, this.detail_date);
+            let date = new Date(this.date);
+            let month = (date.getMonth()+1).toString().length === 1 ? '0'+(date.getMonth()+1).toString(): (date.getMonth()+1).toString();
+            let day = (date.getDate()).toString().length === 1 ? '0'+(date.getDate()).toString(): (date.getDate()).toString();
+
+            this.getContent(date.getFullYear(), month, day);
         },
-        computed : mapState({
+        computed : mapState({ // that is needed no longer. the item for refactoring
             year :  (state) => state.combo.year,
             month : (state) => state.combo.month,
             whoParent : (state) => state.parent.who
@@ -48,9 +53,31 @@
                 // alert(this.$store.state.combo.month);
             },
             btnSaveClick() {
-                console.log('year  ' + this.year);
-                console.log('month  ' + this.month);
-                console.log('whoParent  ' + this.whoParent);
+                let date = this.calendarDate.getDate().toString().length === 1 ? '0'+this.calendarDate.getDate().toString() : this.calendarDate.getDate().toString();
+
+                // console.log('date ' + date);
+                // console.log('title ' + this.title);
+                // console.log('content ' + this.content);
+                console.log('writer ' + this.whoParent);
+
+                var data = {
+                    date: date,
+                    title: this.title,
+                    content: this.content,
+                    writer: this.whoParent
+                };
+
+                let month = (this.calendarDate .getMonth()+1).toString().length === 1 ? '0'+(this.calendarDate .getMonth()+1).toString(): (this.calendarDate .getMonth()+1).toString();
+                let yearMonth = this.calendarDate.getFullYear().toString().substr(2,2)+month;
+                let yearMonthDate = yearMonth+date;
+
+                // console.log('yearMonthDate '+yearMonthDate );
+
+                let setDoc = firebase.firestore().collection('growthdiary').doc('diary').collection(yearMonth).doc(yearMonthDate).set(data);
+
+                return setDoc.then(res => {
+                    console.log('Set: ', res);
+                });
             },
             getContent(year, month, day){
 
@@ -63,8 +90,6 @@
                 let yearMonth = year.toString().substr(2, 2)+month.toString();
                 let yearMonthDate = yearMonth+day;
 
-                console.log(yearMonth);
-                console.log(yearMonthDate);
                 let ref = firebase.firestore().collection('growthdiary').doc('diary').collection(yearMonth).doc(yearMonthDate);
 
                 ref.get()
@@ -83,12 +108,15 @@
 
             },
             changeDate(date){
-                console.log(new Date(date));
+                this.calendarDate = new Date(date);
 
-                let changeDate = new Date(date);
+                let month = (this.calendarDate .getMonth()+1).toString().length === 1 ? '0'+(this.calendarDate .getMonth()+1).toString(): (this.calendarDate .getMonth()+1).toString();
 
-                let month = (changeDate.getMonth()+1).toString().length === 1 ? '0'+(changeDate.getMonth()+1).toString(): (changeDate.getMonth()+1).toString();
-                this.getContent(changeDate.getFullYear(), month, changeDate.getDate());
+                let day = (this.calendarDate .getDate()).toString().length === 1 ? '0'+(this.calendarDate .getDate()).toString(): (this.calendarDate .getDate()).toString();
+
+
+                this.getContent(this.calendarDate .getFullYear(), month, day);
+
             }
 
         }

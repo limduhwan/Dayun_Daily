@@ -23,6 +23,9 @@ const store = new Vuex.Store({
         [Constant.SET_DATE] : (state, payload) => {
             state.combo.date = payload.date;
         },
+        [Constant.SET_PARENT] : (state, payload) => {
+            state.parent.who = payload.who;
+        },
     }
 })
 

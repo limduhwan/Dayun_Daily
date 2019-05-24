@@ -25,7 +25,7 @@
             // WriteComGroup
         },
         mounted() {
-            this.$router.push('/list')
+            this.$router.push('/login')
 
         },
         // methods: {
