@@ -70,8 +70,8 @@
 
                 if(this.password.length == 2 && this.password == '23' || this.password == '11' ){
                     if(this.password == '23'){
-                        this.momOrDaddy = 'Mom I love you ❤︎';
-                        this.setParent({who: 'Mommmy'});
+                        this.momOrDaddy = 'Mommy I love you ❤︎';
+                        this.setParent({who: 'Mommy'});
                     }else if(this.password == '11'){
                         this.momOrDaddy = 'Daddy I love you ❤';
                         this.setParent({who: 'Daddy'});
