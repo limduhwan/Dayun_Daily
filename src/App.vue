@@ -21,7 +21,7 @@
         }
       },
       created () {
-        console.log('create');
+        //console.log('create');
 
 
         this.setYear({year :  this.currentYear});

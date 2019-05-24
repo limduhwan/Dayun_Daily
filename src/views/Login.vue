@@ -61,7 +61,7 @@
             add(char) {
                 this.password = this.password.concat(char);
 
-                console.log(this.password);
+                //console.log(this.password);
 
                 if(char == 'AC'){
                     this.password = '';

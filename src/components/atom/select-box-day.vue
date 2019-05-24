@@ -13,7 +13,7 @@
         },
         mounted() {
           // this.today = this.date;
-          console.log('datepicker ' + this.date)
+          //console.log('datepicker ' + this.date)
         },
         data: function () {
             return {

@@ -64,7 +64,7 @@
                 this.$router.push({ name: 'write', params: {detail_date: ''}})
             },
             titleClick (date) {
-                console.log('List  '+date);
+                //console.log('List  '+date);
                 this.setDate({date: date});
                 this.$router.push({ name: 'write', params: {detail_date: date}})
             },

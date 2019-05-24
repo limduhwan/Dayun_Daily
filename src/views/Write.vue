@@ -58,7 +58,7 @@
                 // console.log('date ' + date);
                 // console.log('title ' + this.title);
                 // console.log('content ' + this.content);
-                console.log('writer ' + this.whoParent);
+                // console.log('writer ' + this.whoParent);
 
                 var data = {
                     date: date,
@@ -95,9 +95,9 @@
                 ref.get()
                     .then(doc => {
                         if (!doc.exists) {
-                            console.log('No such document!');
+                            //console.log('No such document!');
                         } else {
-                            console.log('Document data:', doc.data().content);
+                            //console.log('Document data:', doc.data().content);
                             this.title = doc.data().title;
                             this.content = doc.data().content;
                         }
