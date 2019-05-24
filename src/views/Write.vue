@@ -22,7 +22,6 @@
         },
         data () {
             return{
-                date: '',
                 title: '',
                 content: '',
                 calendarDate: new Date()
@@ -41,8 +40,6 @@
             let day = (date.getDate()).toString().length === 1 ? '0'+(date.getDate()).toString(): (date.getDate()).toString();
 
             this.getContent(date.getFullYear(), month, day);
-
-            // this.calendarDate = this.date;
         },
         computed : mapState({ // that is needed no longer. the item for refactoring
             year :  (state) => state.combo.year,
