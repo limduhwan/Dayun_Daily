@@ -16,8 +16,14 @@ firebase deploy
 -- vuex
 npm install vuex --save
 
+-- Previewing locally
+npm install -g serve
+
 --component
 npm install vue-tables-2
 npm install --save vue2-editor
 npm install bootstrap
 npm install vuejs-datepicker --save
+
+--firebase deploy
+firebase deploy --only hosting

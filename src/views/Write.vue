@@ -1,6 +1,6 @@
 <template>
     <div>
-        <WriteComGroup @goBackList="goList" @btnSaveClick="btnSaveClick" :date="date" @changeDate="changeDate"></WriteComGroup>
+        <WriteComGroup @goBackList="goList" @btnSaveClick="btnSaveClick" :date="calendarDate" @changeDate="changeDate"></WriteComGroup>
         <input class="title" v-model='title' placeholder="Dayun Story">
         <!--{{this.year}} {{this.month}} {{this.whoParent}}-->
         <vue-editor id="editor1" v-model="content"></vue-editor>
@@ -34,13 +34,15 @@
             // console.log('month '+this.month);
             // console.log('detail date '+this.detail_date);
 
-            this.date = this.detail_date == '' ? new Date() : new Date(this.year, this.month-1, this.detail_date);
+            this.calendarDate = this.detail_date == '' ? new Date() : new Date(this.year, this.month-1, this.detail_date);
 
-            let date = new Date(this.date);
+            let date = new Date(this.calendarDate);
             let month = (date.getMonth()+1).toString().length === 1 ? '0'+(date.getMonth()+1).toString(): (date.getMonth()+1).toString();
             let day = (date.getDate()).toString().length === 1 ? '0'+(date.getDate()).toString(): (date.getDate()).toString();
 
             this.getContent(date.getFullYear(), month, day);
+
+            // this.calendarDate = this.date;
         },
         computed : mapState({ // that is needed no longer. the item for refactoring
             year :  (state) => state.combo.year,
@@ -71,7 +73,7 @@
                 let yearMonth = this.calendarDate.getFullYear().toString().substr(2,2)+month;
                 let yearMonthDate = yearMonth+date;
 
-                // console.log('yearMonthDate '+yearMonthDate );
+                console.log('yearMonthDate '+yearMonthDate );
 
                 let setDoc = firebase.firestore().collection('growthdiary').doc('diary').collection(yearMonth).doc(yearMonthDate).set(data);
 
