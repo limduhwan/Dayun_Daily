@@ -1,9 +1,9 @@
 <template>
     <div>
         <div tyle="float: left; width: 0%; padding: 0px 0px 0px 0px;">
-            <select-box-year></select-box-year>
-            <select-box-month></select-box-month>
-            <button class="button" @click="writeBtnClick()">작성</button>
+            <select-box-year @changeYear="changeYear"></select-box-year>
+            <select-box-month @changeMonth="changeMonth"></select-box-month>
+            <button class="button" @click="writeBtnClick()">Write</button>
         </div>
     </div>
 </template>
@@ -21,6 +21,12 @@
         methods: {
             writeBtnClick() {
                 this.$emit('writeBtnClick', '');
+            },
+            changeMonth(month){
+                this.$emit('changeMonth', month);
+            },
+            changeYear(year){
+                this.$emit('changeYear', year);
             }
         }
 

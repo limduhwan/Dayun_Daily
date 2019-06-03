@@ -26,6 +26,19 @@ const store = new Vuex.Store({
         [Constant.SET_PARENT] : (state, payload) => {
             state.parent.who = payload.who;
         },
+    },
+    actions : {
+        [Constant.SET_MONTH] : (store, payload) => {
+            store.commit(Constant.SET_MONTH, payload.month);
+        },
+    },
+    getters :{
+        getYear(state){
+            return state.combo.year;
+        },
+        getMonth(state){
+            return state.combo.month;
+        }
     }
 })
 

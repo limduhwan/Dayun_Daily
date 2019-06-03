@@ -1,5 +1,5 @@
 <template>
-    <select class="selectBox" v-model="month" @change="setMonth({month: month})">
+    <select class="selectBox" v-model="month" @change="changeMonth($event)">
         <!--<option v-for="month in months" v-bind:key="month">-->
             <!--{{month}}-->
         <!--</option>-->
@@ -26,7 +26,7 @@
         name: "selectBoxMonth",
         data: function(){
             return{
-                months: 12,
+                 // month: ''
             }
         },
         computed: mapState({
@@ -35,7 +35,18 @@
         methods :{
             ...mapMutations({
                 setMonth : Constant.SET_MONTH,
-            })
+            }),
+            changeMonth(event){
+                // console.log('Change month ' + event.target.value);
+                this.setMonth({month: event.target.value});
+                // let month = event.target.value;
+                // this.$store.dispatch((Constant.SET_MONTH, {month: month})).then(() =>{
+                //
+                // })
+
+                // console.log(this.$store.state.combo.month);
+                this.$emit('changeMonth', event.target.value);
+            }
         }
     }
 </script>

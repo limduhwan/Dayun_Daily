@@ -29,12 +29,8 @@
         },
         mounted (){
             // console.log('write mounted detail_date ' + this.detail_date);
-            // console.log('year '+this.year);
-            // console.log('month '+this.month);
-            // console.log('detail date '+this.detail_date);
-
-            this.calendarDate = this.detail_date == '' ? new Date() : new Date(this.year, this.month-1, this.detail_date);
-
+            // this.calendarDate = this.detail_date == '' ? new Date() : new Date(this.year, this.month-1, this.detail_date);
+            this.calendarDate = this.detail_date == '' ? new Date() : this.detail_date;
             let date = new Date(this.calendarDate);
             let month = (date.getMonth()+1).toString().length === 1 ? '0'+(date.getMonth()+1).toString(): (date.getMonth()+1).toString();
             let day = (date.getDate()).toString().length === 1 ? '0'+(date.getDate()).toString(): (date.getDate()).toString();
@@ -48,8 +44,8 @@
         }),
         methods: {
             goList () {
-                this.$router.push('/list')
-                // alert(this.$store.state.combo.month);
+                this.$router.push('/list');
+
             },
             btnSaveClick() {
                 let date = this.calendarDate.getDate().toString().length === 1 ? '0'+this.calendarDate.getDate().toString() : this.calendarDate.getDate().toString();
@@ -70,33 +66,33 @@
                 let yearMonth = this.calendarDate.getFullYear().toString().substr(2,2)+month;
                 let yearMonthDate = yearMonth+date;
 
-                console.log('yearMonthDate '+yearMonthDate );
+                // console.log('yearMonthDate '+yearMonthDate );
 
                 let setDoc = firebase.firestore().collection('growthdiary').doc('diary').collection(yearMonth).doc(yearMonthDate).set(data);
 
+
                 return setDoc.then(res => {
-                    console.log('Set: ', res);
+                   // alert('저장했어용~❤︎');
+                    this.$router.push({ name: 'detail', params: {detail_date: this.calendarDate}});
                 });
+
+
             },
             getContent(year, month, day){
 
                 this.title = '';
                 this.content = '';
 
-                // console.log('ttitle' + this.title);
-                // console.log(this.content);
-
                 let yearMonth = year.toString().substr(2, 2)+month.toString();
                 let yearMonthDate = yearMonth+day;
 
                 let ref = firebase.firestore().collection('growthdiary').doc('diary').collection(yearMonth).doc(yearMonthDate);
-
                 ref.get()
                     .then(doc => {
                         if (!doc.exists) {
-                            //console.log('No such document!');
+                            // console.log('No such document!');
                         } else {
-                            //console.log('Document data:', doc.data().content);
+                            // console.log('Document data:', doc.data().content);
                             this.title = doc.data().title;
                             this.content = doc.data().content;
                         }
@@ -112,7 +108,6 @@
                 let month = (this.calendarDate .getMonth()+1).toString().length === 1 ? '0'+(this.calendarDate .getMonth()+1).toString(): (this.calendarDate .getMonth()+1).toString();
 
                 let day = (this.calendarDate .getDate()).toString().length === 1 ? '0'+(this.calendarDate .getDate()).toString(): (this.calendarDate .getDate()).toString();
-
 
                 this.getContent(this.calendarDate .getFullYear(), month, day);
 

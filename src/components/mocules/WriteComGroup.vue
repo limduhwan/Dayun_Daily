@@ -2,8 +2,8 @@
     <div>
         <div tyle="float: left; width: 0%; padding: 0px 0px 0px 0px;">
             <SelectBoxDay :date="date" @changeDate="changeDate"></SelectBoxDay>
-            <button class="button" @click="goBackList()">닫기</button>
-            <button class="button" @click="btnSaveClick()">저장</button>
+            <button class="button" @click="goBackList()">Close</button>
+            <button class="button" @click="btnSaveClick()">Save</button>
         </div>
     </div>
 </template>
@@ -35,6 +35,9 @@
                 this.$emit('changeDate', date);
             }
 
+        },
+        mounted (){
+            //console.log('write date  '+this.date);
         }
 
     }

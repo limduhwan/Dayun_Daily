@@ -14,8 +14,8 @@
 </template>
 
 <script>
-    import ListComGroup from '../components/mocules/ListComGroup';
-    import WriteComGroup from '../components/mocules/WriteComGroup';
+    // import ListComGroup from '../components/mocules/ListComGroup';
+    // import WriteComGroup from '../components/mocules/WriteComGroup';
     // import Constant from '../Constant';
 
     export default {

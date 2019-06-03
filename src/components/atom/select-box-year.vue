@@ -1,5 +1,5 @@
 <template>
-    <select class="selectBox" v-model="year" @change="setYear({year: year})">
+    <select class="selectBox" v-model="year" @change="changeYear($event)">
         <option>2019</option>
         <option>2020</option>
         <option>2021</option>
@@ -23,7 +23,11 @@
         methods:{
             ...mapMutations({
                 setYear : Constant.SET_YEAR,
-            })
+            }),
+            changeYear(event){
+                this.setYear({year: event.target.value});
+                this.$emit('changeYear', event.target.value);
+            }
         }
 
     }
