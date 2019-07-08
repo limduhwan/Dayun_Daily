@@ -11,6 +11,9 @@ const store = new Vuex.Store({
         ],
         parent :[
             {who:''}
+        ],
+        content : [
+            {daddy: '', mommy: ''}
         ]
     },
     mutations: {
@@ -25,6 +28,12 @@ const store = new Vuex.Store({
         },
         [Constant.SET_PARENT] : (state, payload) => {
             state.parent.who = payload.who;
+        },
+        [Constant.SET_DADDYCONTENT] : (state, payload) => {
+            state.content.daddy = payload.daddy;
+        },
+        [Constant.SET_MOMMYCONTENT] : (state, payload) => {
+            state.content.mommy = payload.mommy;
         },
     },
     actions : {

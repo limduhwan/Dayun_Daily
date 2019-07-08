@@ -9,7 +9,8 @@
 <script>
     import firebase from '../main';
     import { VueEditor } from 'vue2-editor';
-    import { mapState } from 'vuex';
+    import { mapState, mapMutations } from 'vuex';
+    import Constant from '../Constant';
     import DetailComGroup from '../components/mocules/DetailComGroup';
 
     export default {
@@ -48,6 +49,10 @@
             whoParent : (state) => state.parent.who
         }),
         methods: {
+            ...mapMutations({
+                setDaddyContent : Constant.SET_DADDYCONTENT,
+                setMommyContent : Constant.SET_MOMMYCONTENT,
+            }),
             goList () {
                 this.$router.push('/list')
             },
@@ -74,7 +79,10 @@
                             //console.log('No such document!');
                         } else {
                             this.title = doc.data().title;
-                            this.content = doc.data().content;
+                            //this.content = doc.data().content;
+                            this.content = doc.data().daddy_template+doc.data().daddy_content+doc.data().mommy_template+doc.data().mommy_content;
+                            this.setDaddyContent({daddy: doc.data().daddy_content});
+                            this.setMommyContent({mommy: doc.data().mommy_content});
                         }
                     })
                     .catch(err => {

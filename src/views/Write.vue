@@ -10,7 +10,8 @@
 <script>
     import firebase from '../main';
     import { VueEditor } from 'vue2-editor';
-    import { mapState } from 'vuex';
+    import { mapState, mapMutations } from 'vuex';
+    import Constant from '../Constant';
     import WriteComGroup from '../components/mocules/WriteComGroup';
 
     export default {
@@ -43,6 +44,10 @@
             whoParent : (state) => state.parent.who
         }),
         methods: {
+            ...mapMutations({
+                setDaddyContent : Constant.SET_DADDYCONTENT,
+                setMommyContent : Constant.SET_MOMMYCONTENT,
+            }),
             goList () {
                 this.$router.push('/list');
 
@@ -53,14 +58,49 @@
                 // console.log('date ' + date);
                 // console.log('title ' + this.title);
                 // console.log('content ' + this.content);
-                // console.log('writer ' + this.whoParent);
+                console.log('writer ' + this.whoParent);
+                console.log('this.$store.state.content.mommy ' +this.$store.state.content.mommy);
 
-                var data = {
-                    date: date,
-                    title: this.title,
-                    content: this.content,
-                    writer: this.whoParent
-                };
+
+                let mommyContent = '';
+
+                if(typeof(this.$store.state.content.mommy) == 'undefined'){
+                    mommyContent = '엄마 일기 써 주세용~❤'
+                }else{
+                    mommyContent = this.$store.state.content.mommy;
+                }
+
+                let daddyContent = '';
+
+                if(typeof(this.$store.state.content.daddy) == 'undefined'){
+                    daddyContent = '아빠 일기 써 주세용~❤'
+                }else{
+                    daddyContent = this.$store.state.content.daddy;
+                }
+
+
+
+                if(this.whoParent == "Daddy"){
+                    var data = {
+                        date: date,
+                        title: this.title,
+                        daddy_content : this.content,
+                        mommy_content : mommyContent,
+                        daddy_template: '<h4><span style="color: #0000ff;"><em>From Daddy</em></span></h4>',
+                        mommy_template: '<br><h4><span style="color: #0000ff;"><em>From Mommy</em></span></h4>',
+                        writer: this.whoParent
+                    };
+                }else if (this.whoParent == "Mommy"){
+                    var data = {
+                        date: date,
+                        title: this.title,
+                        daddy_content : daddyContent,
+                        mommy_content : this.content,
+                        daddy_template: '<h4><span style="color: #0000ff;"><em>From Daddy</em></span></h4>',
+                        mommy_template: '<br><h4><span style="color: #0000ff;"><em>From Mommy</em></span></h4>',
+                        writer: this.whoParent
+                    };
+                }
 
                 let month = (this.calendarDate .getMonth()+1).toString().length === 1 ? '0'+(this.calendarDate .getMonth()+1).toString(): (this.calendarDate .getMonth()+1).toString();
                 let yearMonth = this.calendarDate.getFullYear().toString().substr(2,2)+month;
@@ -74,6 +114,8 @@
                 return setDoc.then(res => {
                    // alert('저장했어용~❤︎');
                     this.$router.push({ name: 'detail', params: {detail_date: this.calendarDate}});
+                    this.setDaddyContent({daddy: ''});
+                    this.setMommyContent({mommy: ''});
                 });
 
 
@@ -94,7 +136,12 @@
                         } else {
                             // console.log('Document data:', doc.data().content);
                             this.title = doc.data().title;
-                            this.content = doc.data().content;
+                            if(this.whoParent == "Daddy"){
+                                this.content = doc.data().daddy_content;
+                            }else if (this.whoParent == "Mommy"){
+                                this.content = doc.data().mommy_content;
+                            }
+
                         }
                     })
                     .catch(err => {
