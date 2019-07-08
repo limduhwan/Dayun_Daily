@@ -80,7 +80,23 @@
                         } else {
                             this.title = doc.data().title;
                             //this.content = doc.data().content;
-                            this.content = doc.data().daddy_template+doc.data().daddy_content+doc.data().mommy_template+doc.data().mommy_content;
+                            let mommyContent = '';
+
+                            if(doc.data().mommy_content==''){
+                                mommyContent = '엄마 일기 써 주세요~❤';
+                            }else{
+                                mommyContent = doc.data().mommy_content;
+                            }
+
+                            let daddyContent = '';
+
+                            if(doc.data().daddy_content==''){
+                                daddyContent = '아빠 일기 써 주세요~❤';
+                            }else{
+                                daddyContent = doc.data().daddy_content;
+                            }
+
+                            this.content = doc.data().daddy_template+daddyContent+doc.data().mommy_template+mommyContent;
                             this.setDaddyContent({daddy: doc.data().daddy_content});
                             this.setMommyContent({mommy: doc.data().mommy_content});
                         }

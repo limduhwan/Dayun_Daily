@@ -58,14 +58,14 @@
                 // console.log('date ' + date);
                 // console.log('title ' + this.title);
                 // console.log('content ' + this.content);
-                console.log('writer ' + this.whoParent);
-                console.log('this.$store.state.content.mommy ' +this.$store.state.content.mommy);
+                //console.log('writer ' + this.whoParent);
+                //console.log('this.$store.state.content.mommy ' +this.$store.state.content.mommy);
 
 
                 let mommyContent = '';
 
                 if(typeof(this.$store.state.content.mommy) == 'undefined'){
-                    mommyContent = '엄마 일기 써 주세용~❤'
+                    mommyContent = ''
                 }else{
                     mommyContent = this.$store.state.content.mommy;
                 }
@@ -73,7 +73,7 @@
                 let daddyContent = '';
 
                 if(typeof(this.$store.state.content.daddy) == 'undefined'){
-                    daddyContent = '아빠 일기 써 주세용~❤'
+                    daddyContent = ''
                 }else{
                     daddyContent = this.$store.state.content.daddy;
                 }
