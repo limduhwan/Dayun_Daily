@@ -72,9 +72,10 @@
             titleClick (date) {
                 this.setDate({date: date});
 
-                console.log('this.month   ' +this.month);
+                // console.log('this.month   ' +this.month);
+                // console.log('store month' + this.$store.state.combo.month);
 
-                let clickedDate = new Date(this.year, this.month-1, date);
+                let clickedDate = new Date(this.year, this.$store.state.combo.month-1, date);
 
                 // console.log('clickedDate '+clickedDate);
                 this.$router.push({ name: 'detail', params: {detail_date: clickedDate}});
@@ -86,6 +87,7 @@
             changeMonth() {
                 // console.log(this.$store.state.combo.month)
                 // this.month = this.$store.state.combo.month;
+
                 this.getContent(this.year, this.$store.state.combo.month);
             },
             ...mapMutations ({

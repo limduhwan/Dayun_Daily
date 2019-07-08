@@ -36,6 +36,8 @@
 
             let date = new Date(this.calendarDate);
             let month = (date.getMonth()+1).toString().length === 1 ? '0'+(date.getMonth()+1).toString(): (date.getMonth()+1).toString();
+
+            // console.log('detail month ' + month);
             let day = (date.getDate()).toString().length === 1 ? '0'+(date.getDate()).toString(): (date.getDate()).toString();
 
             this.getContent(date.getFullYear(), month, day);
