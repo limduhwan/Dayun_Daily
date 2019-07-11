@@ -4,6 +4,7 @@
             <SelectBoxDay :date="date" @changeDate="changeDate"></SelectBoxDay>
             <button class="button" @click="goBackList()">Close</button>
             <button class="button" @click="btnSaveClick()">Save</button>
+            <button class="button" @click="vision()">Vision</button>
         </div>
     </div>
 </template>
@@ -29,6 +30,9 @@
             },
             btnSaveClick() {
                this.$emit('btnSaveClick', '');
+            },
+            vision() {
+                this.$emit('vision', '');
             },
             changeDate (date){
                 // console.log('write ' + date);

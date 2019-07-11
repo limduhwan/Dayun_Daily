@@ -27,3 +27,9 @@ npm install vuejs-datepicker --save
 
 --firebase deploy
 firebase deploy --only hosting
+
+--axios
+npm install --save axios
+
+--html parser
+npm install --save node-html-parser

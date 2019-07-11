@@ -96,7 +96,7 @@
                                 daddyContent = doc.data().daddy_content;
                             }
 
-                            this.content = doc.data().daddy_template+daddyContent+doc.data().mommy_template+mommyContent;
+                            this.content = doc.data().daddy_template+daddyContent+doc.data().mommy_template+mommyContent+doc.data().tags;
                             this.setDaddyContent({daddy: doc.data().daddy_content});
                             this.setMommyContent({mommy: doc.data().mommy_content});
                         }

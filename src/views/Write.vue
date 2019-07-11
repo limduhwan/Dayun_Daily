@@ -1,6 +1,6 @@
 <template>
     <div>
-        <WriteComGroup @goBackList="goList" @btnSaveClick="btnSaveClick" :date="calendarDate" @changeDate="changeDate"></WriteComGroup>
+        <WriteComGroup @goBackList="goList" @vision="goVision" @btnSaveClick="btnSaveClick" :date="calendarDate" @changeDate="changeDate"></WriteComGroup>
         <input class="title" v-model='title' placeholder="Dayun Story">
         <!--{{this.year}} {{this.month}} {{this.whoParent}}-->
         <vue-editor id="editor1" v-model="content"></vue-editor>
@@ -13,6 +13,8 @@
     import { mapState, mapMutations } from 'vuex';
     import Constant from '../Constant';
     import WriteComGroup from '../components/mocules/WriteComGroup';
+    import axios from 'axios';
+    import { parse } from 'node-html-parser';
 
     export default {
         name: "Write",
@@ -25,7 +27,19 @@
             return{
                 title: '',
                 content: '',
-                calendarDate: new Date()
+                calendarDate: new Date(),
+                apiKey: "AIzaSyBVLUBFR0-E41lQhLvyEZrH5FrjxiaQovg",
+                data: {
+                    "requests": [{
+                        "features": [{
+                            "type": "LABEL_DETECTION"
+                        }],
+                        "image": {
+                            "content": null
+                        }
+                    }]
+                },
+                tags:''
             }
         },
         mounted (){
@@ -52,7 +66,30 @@
                 this.$router.push('/list');
 
             },
-            btnSaveClick() {
+            async goVision() {
+
+                let root = parse(this.content);
+                let arrayHtml = root.querySelector('img').rawAttributes.src.split(',');
+                this.data.requests[0].image.content = arrayHtml[1];
+
+                await axios.post(`https://vision.googleapis.com/v1/images:annotate?key=${this.apiKey}`, this.data).then(response => {
+
+                    let array = response.data.responses[0].labelAnnotations;
+                    for( let i in array ){
+                        // console.log('#'+array[i].description);
+                        this.tags += '#'+array[i].description + ' ';
+                    }
+                    // console.log(this.tags);
+
+                }).catch(error => {
+                    console.log(error);
+                })
+            },
+            async btnSaveClick() {
+                await this.goVision();
+
+                console.log(this.tags);
+
                 let date = this.calendarDate.getDate().toString().length === 1 ? '0'+this.calendarDate.getDate().toString() : this.calendarDate.getDate().toString();
 
                 // console.log('date ' + date);
@@ -78,8 +115,6 @@
                     daddyContent = this.$store.state.content.daddy;
                 }
 
-
-
                 if(this.whoParent == "Daddy"){
                     var data = {
                         date: date,
@@ -88,7 +123,8 @@
                         mommy_content : mommyContent,
                         daddy_template: '<h4><span style="color: #0000ff;"><em>From Daddy</em></span></h4>',
                         mommy_template: '<br><h4><span style="color: #0000ff;"><em>From Mommy</em></span></h4>',
-                        writer: this.whoParent
+                        writer: this.whoParent,
+                        tags: '<br>'+this.tags
                     };
                 }else if (this.whoParent == "Mommy"){
                     var data = {
@@ -98,7 +134,8 @@
                         mommy_content : this.content,
                         daddy_template: '<h4><span style="color: #0000ff;"><em>From Daddy</em></span></h4>',
                         mommy_template: '<br><h4><span style="color: #0000ff;"><em>From Mommy</em></span></h4>',
-                        writer: this.whoParent
+                        writer: this.whoParent,
+                        tags: '<br>'+this.tags
                     };
                 }
 
