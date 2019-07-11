@@ -39,7 +39,7 @@
                 <td @click="add('=')">=</td>
             </tr>
         </table>
-        <h6 style="text-align: right;">ver 190711</h6>
+        <h6 style="text-align: right;">ver 190711.01</h6>
     </div>
 </template>
 

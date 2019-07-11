@@ -1,6 +1,6 @@
 <template>
     <div>
-        <WriteComGroup @goBackList="goList" @vision="goVision" @btnSaveClick="btnSaveClick" :date="calendarDate" @changeDate="changeDate"></WriteComGroup>
+        <WriteComGroup @goBackList="goList" @btnSaveClick="btnSaveClick" :date="calendarDate" @changeDate="changeDate"></WriteComGroup>
         <input class="title" v-model='title' placeholder="Dayun Story">
         <!--{{this.year}} {{this.month}} {{this.whoParent}}-->
         <vue-editor id="editor1" v-model="content"></vue-editor>
